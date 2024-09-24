@@ -2,8 +2,7 @@ const jwt = require("jsonwebtoken");
 const pool = require("../database/db");
 
 exports.protect = async (req, res, next) => {
-  const token =
-    req.headers["authorization"] && req.headers["authorization"].split(" ")[1];
+  const token = req.cookies.token;
 
   const query = await pool.query(
     `

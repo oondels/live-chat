@@ -73,13 +73,19 @@ exports.login = async (req, res) => {
   }
 
   const token = createWebToken(foundUser);
+  res.cookie("token", token, {
+    httoOnly: true,
+    secure: true,
+    maxAge: 3600000,
+  });
+
   console.log(`Logged as ${foundUser.username}`);
   return res.status(201).json({ token });
 };
 
 exports.logout = async (req, res) => {
   try {
-    const token = req.headers["authorization"].split(" ")[1];
+    const token = req.cookies.token;
     if (!token) {
       return res.status(400).json({ message: "Token não fornecido" });
     }

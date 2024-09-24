@@ -41,17 +41,19 @@ body {
 
 .welcome-messages img {
   width: 100px;
+  margin-bottom: 20px;
 }
 
 .welcome-messages h1 {
   color: #3498db;
-  font-size: 2em;
+  font-size: 1.8rem;
   margin-bottom: 10px;
+  font-weight: 500;
   width: 100%;
 }
 
 .welcome-container p {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   margin-bottom: 30px;
 }
 
@@ -59,10 +61,10 @@ body {
   background-color: #3498db;
   border: none;
   color: #fff;
-  padding: 10px 15px;
+  padding: 10px 20px;
   text-decoration: none;
-  font-size: 1.2em;
-  border-radius: 10px;
+  font-size: 1rem;
+  border-radius: 25px;
   transition: background-color 0.3s;
   cursor: pointer;
 }
@@ -94,7 +96,7 @@ body {
 }
 
 /* Estilo do contêiner do chat */
-#chat {
+.chat {
   width: 400px;
   background-color: #1e1e1e;
   border-radius: 10px;
@@ -106,7 +108,7 @@ body {
 }
 
 /* Inputs e botão */
-#chat input {
+.chat input {
   width: 100%;
   padding: 12px;
   border-radius: 5px;
@@ -116,17 +118,17 @@ body {
   font-size: 16px;
 }
 
-#chat input::placeholder {
+.chat input::placeholder {
   color: #bbb;
 }
 
-#chat input:focus {
+.chat input:focus {
   outline: none;
   border: 1px solid #3498db;
 }
 
 /* Botão de enviar com ícone */
-#chat button {
+.chat button {
   width: 100%;
   padding: 12px;
   border-radius: 5px;
@@ -142,11 +144,11 @@ body {
   transition: background-color 0.3s;
 }
 
-#chat button:hover {
+.chat button:hover {
   background-color: #2980b9;
 }
 
-#chat button i {
+.chat button i {
   font-size: 18px;
 }
 
@@ -312,7 +314,7 @@ button[type="submit"]:active {
 /* Main */
 .main {
   position: relative;
-  width: 100%;
+  width: 800px;
 }
 
 /* Users */
@@ -323,6 +325,7 @@ button[type="submit"]:active {
   align-items: center;
   position: absolute;
   left: 1%;
+  top: 0;
 }
 
 #users-online-content {

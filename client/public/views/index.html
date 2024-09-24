@@ -38,9 +38,9 @@
 
       <div class="container">
         <div class="hello">
-          <h1 id="user">Olá</h1>
+          <h1 id="user">Olá <%= user %></h1>
         </div>
-        <form id="chat">
+        <form class="chat" id="chat">
           <div class="messages"></div>
           <input name="message" placeholder="Digit your message" type="text" />
           <button type="submit">
@@ -52,67 +52,10 @@
     </div>
 
     <script type="text/javascript">
-      const token = localStorage.getItem("token");
-
       var socket = io("http://localhost:2399");
 
-      let user;
-
-      if (!token) {
-        window.location.href = "http://localhost:2399/login";
-      } else {
-        fetch("http://localhost:2399/protected", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            if (data) {
-              if (data.redirect) {
-                return (window.location.href = data.redirect);
-              }
-
-              user = data;
-              socket.emit("userLogged", user);
-
-              document.getElementById("user").innerText += ` ${user.user}`;
-            } else {
-              return (window.location.href = "http://localhost:2399/login");
-            }
-          })
-          .catch((err) => {
-            return console.error("Erro:", err);
-          });
-      }
-
-      const logout = document.getElementById("logout");
-      logout.addEventListener("click", () => {
-        fetch("http://localhost:2399/auth/logout", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((data) => {
-            if (data.ok) {
-              return data.json();
-            } else {
-              throw new Error("Falha no logout");
-            }
-          })
-          .then((response) => {
-            console.log(response);
-            return (window.location.href = "http://localhost:2399/home");
-          })
-          .catch((error) => {
-            console.error("Erro no logout:", error);
-          });
-      });
+      const user = "<%- user %>";
+      const userId = "<%= userId %>";
 
       // Mostrar Usuários Online
       const userButton = document.querySelector("#button-users-online");
@@ -136,7 +79,7 @@
       };
 
       const renderMessages = (message) => {
-        if (message.username === user.user) {
+        if (message.username === user) {
           $(".messages").append(
             "<div class='message sent'><strong>" +
               message.username +
@@ -147,13 +90,12 @@
         } else {
           $(".messages").append(
             "<div class='message'><strong>" +
-              message.username +
+              `<a href='/individual-chat/?id=${message.userid}&username=${message.username}'>${message.username}</a>` +
               "</strong>: " +
               message.message +
               "</div>"
           );
         }
-
         setTimeout(() => {
           scrollToBottom();
         }, 0);
@@ -163,16 +105,16 @@
         const usersContainer = document.getElementById("users-online");
         usersContainer.innerHTML = "";
 
-        users.forEach((user) => {
+        users.forEach((userOn) => {
           const userItem = document.createElement("li");
-          userItem.textContent = user.user;
+          userItem.textContent = userOn.user;
           userItem.classList.add("user-item");
           usersContainer.appendChild(userItem);
         });
       });
 
       socket.on("previousMessage", (messages) => {
-        for (message of messages) {
+        for (let message of messages) {
           renderMessages(message);
         }
       });
@@ -188,6 +130,7 @@
         if (message.length) {
           var messageObject = {
             author: user,
+            author_id: userId,
             message: message,
           };
 
