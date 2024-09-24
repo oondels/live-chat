@@ -30,11 +30,9 @@ exports.protect = async (req, res, next) => {
 
   try {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err)
-        return res.status(401).json({
-          message: "Token not found. Redirecting...",
-          redirect: "/login",
-        });
+      if (err) {
+        return res.redirect("/login");
+      }
 
       console.log(`Logged as ${decoded.user}`);
       req.user = decoded;

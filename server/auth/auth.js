@@ -11,7 +11,7 @@ const createWebToken = (user) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: 1000,
+      expiresIn: "1h",
     }
   );
 };

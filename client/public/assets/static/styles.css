@@ -23,6 +23,7 @@ body {
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
 .welcome-container h3 {
@@ -54,7 +55,84 @@ body {
 
 .welcome-container p {
   font-size: 1.2rem;
-  margin-bottom: 30px;
+  margin: 30px;
+}
+
+.welcome-container i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f44336;
+  color: white;
+  font-size: 24px;
+  animation: pulse 1s infinite ease;
+  position: absolute;
+  right: 5%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#warning-message {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: scale(0);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: all ease 0.5s;
+}
+
+#warning-message.show-warning {
+  top: 10%;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.warning-content {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.warning-content p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.warning-content button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.warning-content button:hover {
+  background-color: #d32f2f;
 }
 
 .start-btn {

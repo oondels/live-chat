@@ -14,6 +14,18 @@
   </head>
   <body>
     <div class="welcome-container">
+      <i id="warning-icon" class="material-symbols-outlined"> warning </i>
+
+      <div id="warning-message">
+        <div class="warning-content">
+          <p>
+            Esse aplicativo está em fase de desenvolvimento. Não compartilhe
+            informações pessoais nem confidenciais!
+          </p>
+          <button id="close-warning">Fechar</button>
+        </div>
+      </div>
+
       <div class="welcome-messages">
         <img src="../assets/img/chat.png" alt="chat image" />
         <div class="slide-messages">
@@ -25,9 +37,10 @@
       <p>
         Connect with your friends, make new friends in a fast and secure way!
       </p>
-      <a href="/chat-geral"><button class="start-btn">Chat</button></a>
-      <h3>Make an account and start chating</h3>
-      <div class="aciton-button">
+
+      <div class="action-button">
+        <h3>Make an account and start chating</h3>
+        <a href="/chat-geral"><button class="start-btn">Chat</button></a>
         <a href="/login"><button class="start-btn">Login</button></a>
         <a href="/register"><button class="start-btn">Register</button></a>
       </div>
@@ -48,6 +61,19 @@
       };
 
       setInterval(showSlide, 3000);
+
+      const warningIcon = document.getElementById("warning-icon");
+      warningIcon.addEventListener("click", () => {
+        const warningContainer = document.getElementById("warning-message");
+        warningContainer.classList.add("show-warning");
+      });
+
+      // Fechar o aviso
+      document.getElementById("close-warning").addEventListener("click", () => {
+        document
+          .getElementById("warning-message")
+          .classList.remove("show-warning");
+      });
     </script>
   </body>
 </html>

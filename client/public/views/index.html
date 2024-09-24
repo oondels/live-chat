@@ -20,6 +20,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
+
+    <script src="../assets/js/chat-geral.js" defer></script>
   </head>
   <body>
     <div class="main">
@@ -47,97 +49,9 @@
             <i class="fas fa-paper-plane"></i> Send Message
           </button>
         </form>
-        <button id="logout">Logout</button>
       </div>
     </div>
 
-    <script type="text/javascript">
-      var socket = io("http://localhost:2399");
-
-      const user = "<%- user %>";
-      const userId = "<%= userId %>";
-
-      // Mostrar Usuários Online
-      const userButton = document.querySelector("#button-users-online");
-      userButton.addEventListener("click", () => {
-        const userOnlineContent = document.querySelector(
-          "#users-online-content"
-        );
-
-        if (userOnlineContent.classList.contains("show")) {
-          userOnlineContent.classList.remove("show");
-        } else {
-          userOnlineContent.classList.add("show");
-        }
-      });
-
-      const scrollToBottom = () => {
-        const messagesDiv = document.querySelector(".messages");
-        setTimeout(() => {
-          messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }, 0);
-      };
-
-      const renderMessages = (message) => {
-        if (message.username === user) {
-          $(".messages").append(
-            "<div class='message sent'><strong>" +
-              message.username +
-              "</strong>: " +
-              message.message +
-              "</div>"
-          );
-        } else {
-          $(".messages").append(
-            "<div class='message'><strong>" +
-              `<a href='/individual-chat/?id=${message.userid}&username=${message.username}'>${message.username}</a>` +
-              "</strong>: " +
-              message.message +
-              "</div>"
-          );
-        }
-        setTimeout(() => {
-          scrollToBottom();
-        }, 0);
-      };
-
-      socket.on("onlineUsers", (users) => {
-        const usersContainer = document.getElementById("users-online");
-        usersContainer.innerHTML = "";
-
-        users.forEach((userOn) => {
-          const userItem = document.createElement("li");
-          userItem.textContent = userOn.user;
-          userItem.classList.add("user-item");
-          usersContainer.appendChild(userItem);
-        });
-      });
-
-      socket.on("previousMessage", (messages) => {
-        for (let message of messages) {
-          renderMessages(message);
-        }
-      });
-
-      socket.on("newMessage", (message) => {
-        renderMessages(message);
-      });
-
-      $("#chat").submit((event) => {
-        event.preventDefault();
-        var message = $("input[name=message]").val();
-
-        if (message.length) {
-          var messageObject = {
-            author: user,
-            author_id: userId,
-            message: message,
-          };
-
-          socket.emit("messageSend", messageObject);
-          $("input[name=message]").val("");
-        }
-      });
-    </script>
+    <script type="text/javascript"></script>
   </body>
 </html>
