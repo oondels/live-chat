@@ -1,3 +1,3 @@
-const ip = "localhost:2399";
+const ip = "https://live-chat-bach.vercel.app";
 
 export default ip;
