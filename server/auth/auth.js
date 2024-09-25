@@ -73,10 +73,12 @@ exports.login = async (req, res) => {
   }
 
   const token = createWebToken(foundUser);
+  console.log(token);
   res.cookie("token", token, {
     httoOnly: true,
     secure: true,
     maxAge: 3600000,
+    sameSite: "Lax",
   });
 
   console.log(`Logged as ${foundUser.username}`);

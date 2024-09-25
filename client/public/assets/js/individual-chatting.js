@@ -1,4 +1,4 @@
-// import ip from "../ip.js";
+import ip from "../ip.js";
 
 const params = new URLSearchParams(window.location.search);
 const chatUserId = params.get("id");
@@ -6,11 +6,12 @@ const chatUsername = params.get("username");
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
-  fetch(`htpps://live-chat-sand.vercel.app/api/user-info`, {
+  fetch(`http://${ip}/api/user-info`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
   })
     .then((response) => {
       if (!response.ok) {
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const privateMessages = () => {
-  var socket = io(`htpps://live-chat-sand.vercel.app/`);
+  var socket = io(`http://${ip}/`);
 
   const chatUserTitle = document.getElementById("private-chat");
   chatUserTitle.innerHTML = `Chating with ${chatUsername}`;

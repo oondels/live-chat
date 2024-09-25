@@ -1,14 +1,15 @@
-// import ip from "../ip.js";
+import ip from "../ip.js";
 
-var socket = io(`https://live-chat-sand.vercel.app.app`);
+var socket = io(`http://${ip}`);
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
-  fetch(`https://live-chat-sand.vercel.app.app/api/user-info`, {
+  fetch(`http://${ip}/api/user-info`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include", // Garantir que os cookies sejam enviado junto coma  requisição
   })
     .then((response) => {
       if (!response.ok) {
@@ -18,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then((data) => {
       user = data;
-
       messages();
     })
     .catch((error) => {
@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const messages = () => {
-  console.log(user);
   // Mostrar Usuários Online
   const userButton = document.querySelector("#button-users-online");
   userButton.addEventListener("click", () => {

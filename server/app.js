@@ -4,7 +4,8 @@ const path = require("path");
 const http = require("http");
 const pool = require("./database/db");
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const ip = "localhost";
 
 const authMiddleware = require("./auth/authMiddleware");
 const authRoutes = require("./auth/authRoutes");
@@ -13,11 +14,24 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
 const server = http.createServer(app);
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: `http://${ip}:2699`,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Authorization"],
+    credentials: true,
+  },
+});
 
 app.use(express.static(path.join(__dirname, "../client/public")));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: `http://${ip}:2699`,
+    credentials: true,
+  })
+);
 app.use("/auth", authRoutes);
 
 app.set("views", path.join(__dirname, "../client/public/views"));
@@ -61,7 +75,6 @@ io.on("connection", async (socket) => {
     `,
       [data.senderUserId, data.receiverUserId]
     );
-    console.log(queryPreviousPrivateMessages.rows);
     socket.emit("previousPrivateMessages", queryPreviousPrivateMessages.rows);
   });
 
@@ -85,7 +98,6 @@ io.on("connection", async (socket) => {
   socket.emit("previousMessage", previousMessages.rows, users);
 
   socket.on("messageSend", async (data) => {
-    console.log(data);
     try {
       const query = await pool.query(
         `
@@ -108,8 +120,6 @@ io.on("connection", async (socket) => {
   });
 
   socket.on("individualMessage", async (data) => {
-    console.log(data);
-
     try {
       const postIndividualMessage = await pool.query(
         `
@@ -135,77 +145,10 @@ io.on("connection", async (socket) => {
   // });
 });
 
-app.get("/", (req, res) => {
-  res.render("home.html");
-});
-
-app.get("/chat-geral", authMiddleware.protect, (req, res) => {
-  const user = req.user;
-
-  res.render("index.html", {
-    userId: user.id,
-    user: user.user,
-    userEmail: user.email,
-  });
-});
-
-app.get("/individual-chat", authMiddleware.protect, (req, res) => {
-  const user = req.user;
-  res.render("individual-chating.html", {
-    userId: user.id,
-    user: user.user,
-    userEmail: user.email,
-  });
-});
-
 app.get("/api/user-info", authMiddleware.protect, (req, res) => {
   const user = req.user;
 
   res.json(user);
-});
-
-app.get("/protected", authMiddleware.protect, (req, res) => {
-  res.json(req.user);
-});
-
-app.get("/login", (req, res) => {
-  if (req.cookies.token) {
-    // Tenta verificar o token
-    try {
-      jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-          // Se o token for inválido ou expirado, renderiza a página de login
-          return res.render("login.html");
-        }
-        // Se o token for válido, redireciona para a página apropriada (por exemplo, /dashboard)
-        return res.redirect("/"); // Redirecione para a página após login
-      });
-    } catch (err) {
-      // Se houver um erro na verificação do token, renderiza a página de login
-      return res.render("login.html");
-    }
-  } else {
-    // Se não houver token, exibe a página de login
-    res.render("login.html");
-  }
-});
-
-app.get("/register", (req, res) => {
-  if (req.cookies.token) {
-    try {
-      jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-          return res.render("register.html");
-        }
-
-        return res.redirect("/");
-      });
-    } catch (err) {
-      return res.render("register.html");
-    }
-  } else {
-    res.render("register.html");
-  }
 });
 
 app.get("/teste", (req, res) => {

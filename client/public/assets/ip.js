@@ -1,3 +1,3 @@
-const ip = "live-chat-roan.vercel.app";
+const ip = "localhost:2399";
 
 export default ip;
