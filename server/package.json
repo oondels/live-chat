@@ -2,9 +2,13 @@
   "name": "live-chat",
   "version": "1.1.0",
   "main": "app.js",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "test": "\u001b[A\u001b[Bdev",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

@@ -5,7 +5,7 @@ const http = require("http");
 const pool = require("./database/db");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const ip = "localhost";
+const ip = "live-chat-hazel.vercel.app";
 
 const authMiddleware = require("./auth/authMiddleware");
 const authRoutes = require("./auth/authRoutes");
@@ -16,7 +16,7 @@ const port = process.env.PORT;
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: `http://${ip}:2699`,
+    origin: `http://${ip}`,
     methods: ["GET", "POST"],
     allowedHeaders: ["Authorization"],
     credentials: true,
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: `http://${ip}:2699`,
+    origin: `http://${ip}`,
     credentials: true,
   })
 );
@@ -151,6 +151,6 @@ app.get("/api/user-info", authMiddleware.protect, (req, res) => {
   res.json(user);
 });
 
-app.get("/teste", (req, res) => {
-  res.send("Heelo World!");
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
