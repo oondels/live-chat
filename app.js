@@ -215,3 +215,7 @@ app.get("/register", (req, res) => {
     res.render("register.html");
   }
 });
+
+app.get("/teste", (req, res) => {
+  res.send("Hello World");
+});
