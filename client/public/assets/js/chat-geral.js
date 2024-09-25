@@ -1,4 +1,5 @@
 var socket = io(`https://live-chat-bach.vercel.app`, {
+  transports: ["websocket"],
   withCredentials: true,
 });
 

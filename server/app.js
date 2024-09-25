@@ -20,6 +20,7 @@ const io = require("socket.io")(server, {
     allowedHeaders: ["Authorization"],
     credentials: true,
   },
+  transports: ["websocket", "polling"],
 });
 
 app.use(express.static(path.join(__dirname, "../client/public")));
