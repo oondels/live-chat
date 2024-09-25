@@ -1,3 +1,4 @@
+var socket = io("https://live-chat-b304260d434c.herokuapp.com/");
 const params = new URLSearchParams(window.location.search);
 const chatUserId = params.get("id");
 const chatUsername = params.get("username");
