@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "test": "\u001b[A\u001b[Bdev",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
