@@ -16,8 +16,8 @@ const port = process.env.PORT;
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: `http://${ip}`,
-    methods: ["GET", "POST"],
+    origin: `https://${ip}`,
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Authorization"],
     credentials: true,
   },
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: `http://${ip}`,
+    origin: `https://${ip}`,
     credentials: true,
   })
 );

@@ -16,7 +16,7 @@ if (loginForm) {
       password: password,
     };
 
-    fetch(`http://live-chat-bach.vercel.app/auth/login`, {
+    fetch(`https://live-chat-bach.vercel.app/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ if (loginForm) {
       .then((data) => {
         alert("Logged succesfully");
         setTimeout(() => {
-          window.location.href = `http://localhost:2699/chat-geral`;
+          window.location.href = `https://localhost:2699/chat-geral`;
         }, 700);
       })
       .catch((error) => {
@@ -63,7 +63,7 @@ if (registerForm) {
       password: password,
     };
 
-    fetch(`http://live-chat-bach.vercel.app/auth/register`, {
+    fetch(`https://live-chat-bach.vercel.app/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ if (registerForm) {
         alert("Registered Successfully!");
 
         setTimeout(() => {
-          window.location.href = `http://live-chat-bach.vercel.app/login`;
+          window.location.href = `https://live-chat-bach.vercel.app/login`;
         }, 700);
       })
       .catch((error) => {

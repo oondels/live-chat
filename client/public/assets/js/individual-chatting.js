@@ -4,7 +4,7 @@ const chatUsername = params.get("username");
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
-  fetch(`http://live-chat-bach.vercel.app/api/user-info`, {
+  fetch(`https://live-chat-bach.vercel.app/api/user-info`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const privateMessages = () => {
-  var socket = io(`http://live-chat-bach.vercel.app/`);
+  var socket = io(`https://live-chat-bach.vercel.app/`);
 
   const chatUserTitle = document.getElementById("private-chat");
   chatUserTitle.innerHTML = `Chating with ${chatUsername}`;
