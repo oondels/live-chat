@@ -1,7 +1,4 @@
-import ip from "../ip.js";
-
 //Login
-
 var loginForm = document.querySelector("#login-form");
 if (loginForm) {
   loginForm.addEventListener("submit", (event) => {
@@ -19,7 +16,7 @@ if (loginForm) {
       password: password,
     };
 
-    fetch(`http://${ip}/auth/login`, {
+    fetch(`http://live-chat-bach.vercel.app/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +63,7 @@ if (registerForm) {
       password: password,
     };
 
-    fetch(`http://${ip}/auth/register`, {
+    fetch(`http://live-chat-bach.vercel.app/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,7 +81,7 @@ if (registerForm) {
         alert("Registered Successfully!");
 
         setTimeout(() => {
-          window.location.href = `http://${ip}/login`;
+          window.location.href = `http://live-chat-bach.vercel.app/login`;
         }, 700);
       })
       .catch((error) => {
