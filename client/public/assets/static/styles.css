@@ -457,3 +457,10 @@ button[type="submit"]:active {
   border-radius: 50%;
   cursor: pointer;
 }
+
+/* Alert */
+.show-alert {
+  width: 300px;
+  height: 200px;
+  background-color: red;
+}
