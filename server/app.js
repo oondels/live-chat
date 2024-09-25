@@ -5,7 +5,7 @@ const http = require("http");
 const pool = require("./database/db");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const ip = "live-chat-hazel.vercel.app";
+const ip = "live-chat-woad.vercel.app";
 
 const authMiddleware = require("./auth/authMiddleware");
 const authRoutes = require("./auth/authRoutes");
