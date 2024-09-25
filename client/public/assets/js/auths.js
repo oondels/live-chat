@@ -16,7 +16,7 @@ form.addEventListener("submit", (event) => {
     password: password,
   };
 
-  fetch(`http://live-chat-sand.vercel.app/auth/login`, {
+  fetch(`https://live-chat-sand.vercel.app/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +34,7 @@ form.addEventListener("submit", (event) => {
       alert("Logged succesfully");
 
       setTimeout(() => {
-        window.location.href = `http://live-chat-sand.vercel.app/chat-geral`;
+        window.location.href = `https://live-chat-sand.vercel.app/chat-geral`;
       }, 700);
     })
     .catch((error) => {
@@ -61,7 +61,7 @@ form.addEventListener("submit", (event) => {
     password: password,
   };
 
-  fetch(`http://live-chat-sand.vercel.app/auth/register`, {
+  fetch(`https://live-chat-sand.vercel.app/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -78,7 +78,7 @@ form.addEventListener("submit", (event) => {
       alert("Registered Successfully!");
 
       setTimeout(() => {
-        window.location.href = `http://live-chat-sand.vercel.app/login`;
+        window.location.href = `https://live-chat-sand.vercel.app/login`;
       }, 700);
     })
     .catch((error) => {
