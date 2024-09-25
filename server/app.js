@@ -5,7 +5,6 @@ const http = require("http");
 const pool = require("./database/db");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const ip = "live-chat-woad.vercel.app";
 
 const authMiddleware = require("./auth/authMiddleware");
 const authRoutes = require("./auth/authRoutes");
@@ -16,7 +15,7 @@ const port = process.env.PORT;
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: `https://${ip}`,
+    origin: `https://live-chat-woad.vercel.app`,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Authorization"],
     credentials: true,
@@ -28,7 +27,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: `https://${ip}`,
+    origin: `https://live-chat-woad.vercel.app`,
     credentials: true,
   })
 );

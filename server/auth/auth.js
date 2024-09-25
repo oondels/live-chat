@@ -78,7 +78,7 @@ exports.login = async (req, res) => {
     httoOnly: true,
     secure: true,
     maxAge: 3600000,
-    sameSite: "Lax",
+    sameSite: "None",
   });
 
   console.log(`Logged as ${foundUser.username}`);

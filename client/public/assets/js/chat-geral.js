@@ -1,4 +1,6 @@
-var socket = io(`https://live-chat-bach.vercel.app`);
+var socket = io(`https://live-chat-bach.vercel.app`, {
+  withCredentials: true,
+});
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
