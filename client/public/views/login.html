@@ -6,6 +6,7 @@
     <title>Login</title>
 
     <link rel="stylesheet" href="../assets/static/styles.css" />
+    <script type="module" src="../assets/js/auth.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -33,49 +34,5 @@
         </p>
       </form>
     </div>
-
-    <script type="text/javascript">
-      var form = document.querySelector("#login-form");
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        var user = document.querySelector("input[name=login]").value;
-        var password = document.querySelector("input[name=password]").value;
-
-        if (!user.length && !password.length) {
-          return alet("All fields are requuired");
-        }
-
-        let userInfo = {
-          user: user,
-          password: password,
-        };
-
-        fetch("http://localhost:2399/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userInfo),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to fecth");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            localStorage.setItem("token", data.token);
-            alert("Logged succesfully");
-
-            setTimeout(() => {
-              window.location.href = "http://localhost:2399/chat-geral";
-            }, 700);
-          })
-          .catch((error) => {
-            console.error("Server connection failed", error.message);
-          });
-      });
-    </script>
   </body>
 </html>

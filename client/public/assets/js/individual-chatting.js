@@ -1,10 +1,12 @@
+import ip from "../ip.js";
+
 const params = new URLSearchParams(window.location.search);
 const chatUserId = params.get("id");
 const chatUsername = params.get("username");
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:2399/api/user-info", {
+  fetch(`http://${ip}/api/user-info`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const privateMessages = () => {
-  var socket = io("http://localhost:2399/");
+  var socket = io(`http://${ip}/`);
 
   const chatUserTitle = document.getElementById("private-chat");
   chatUserTitle.innerHTML = `Chating with ${chatUsername}`;

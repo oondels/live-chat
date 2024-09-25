@@ -1,8 +1,10 @@
-var socket = io("http://localhost:2399");
+import ip from "../ip.js";
+
+var socket = io(`http://${ip}`);
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:2399/api/user-info", {
+  fetch(`http://${ip}/api/user-info`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
