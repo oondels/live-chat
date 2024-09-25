@@ -15,12 +15,12 @@ const port = process.env.PORT;
 const server = http.createServer(app);
 const io = require("socket.io")(server);
 
-app.use(express.static(path.join(__dirname, "../client/public")));
+app.use(express.static(path.join(__dirname, "./client/public")));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/auth", authRoutes);
 
-app.set("views", path.join(__dirname, "../client/public/views"));
+app.set("views", path.join(__dirname, "./client/public/views"));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
