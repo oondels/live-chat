@@ -1,3 +1,3 @@
-const ip = "live-chat-gamma.vercel.app";
+const ip = "live-chat-roan.vercel.app";
 
 export default ip;
