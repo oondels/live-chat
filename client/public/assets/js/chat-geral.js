@@ -1,10 +1,10 @@
-import ip from "../ip.js";
+// import ip from "../ip.js";
 
-var socket = io(`http://${ip}`);
+var socket = io(`http://live-chat-roan.vercel.app`);
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
-  fetch(`http://${ip}/api/user-info`, {
+  fetch(`http://live-chat-roan.vercel.app/api/user-info`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
