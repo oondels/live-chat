@@ -34,7 +34,7 @@ if (loginForm) {
       .then((data) => {
         alert("Logged succesfully");
         setTimeout(() => {
-          window.location.href = `https://localhost:2699/chat-geral`;
+          window.location.href = `https://live-chat-bach.vercel.app/chat-geral`;
         }, 700);
       })
       .catch((error) => {
