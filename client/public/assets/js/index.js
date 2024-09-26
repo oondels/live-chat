@@ -2,6 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const authButtons = document.querySelector(".login-register");
   const logoutButton = document.querySelector(".logout-btn");
 
+  const navBar = document.querySelector(".navbar");
+  const menuButton = document.querySelector(".menu-icon");
+  menuButton.addEventListener("click", () => {
+    navBar.classList.toggle("show");
+  });
+
   const alert = document.querySelector(".alert");
   const alertMessage = document.querySelector(".alert-text");
   const closeAlertMessage = document.querySelector("close-alert");
