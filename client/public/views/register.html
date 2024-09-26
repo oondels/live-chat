@@ -60,7 +60,7 @@
           password: password,
         };
 
-        fetch("https://live-chat-b304260d434c.herokuapp.com/auth/register", {
+        fetch("http://localhost:2399/auth/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -77,8 +77,7 @@
             alert("Registered Successfully!");
 
             setTimeout(() => {
-              window.location.href =
-                "https://live-chat-b304260d434c.herokuapp.com/login";
+              window.location.href = "http://localhost:2399/login";
             }, 700);
           })
           .catch((error) => {

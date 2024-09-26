@@ -291,6 +291,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .hello {
@@ -461,6 +462,8 @@ button[type="submit"]:active {
 /* Alert */
 .show-alert {
   width: 300px;
-  height: 200px;
+  height: 250px;
   background-color: red;
+  position: absolute;
+  /* right: 30%; */
 }
