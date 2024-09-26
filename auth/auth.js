@@ -91,8 +91,9 @@ exports.login = async (req, res) => {
     maxAge: 3600000,
   });
 
-  console.log(`Logged as ${foundUser.username}`);
-  return res.status(200).json({ message: `Logged as ${foundUser.username}` });
+  return res
+    .status(200)
+    .json({ message: `Logged as ${foundUser.username}`, user: foundUser });
 };
 
 exports.logout = async (req, res) => {

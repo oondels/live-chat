@@ -5,19 +5,29 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: "Arial", sans-serif;
   background-color: #121212;
   color: #ffffff;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   height: 100vh;
-  padding: 20px;
   padding-top: 70px;
 }
 
 /* Home */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .welcome-container {
   text-align: center;
   background-color: #1c1c1c;
@@ -89,20 +99,23 @@ body {
 }
 
 #warning-message {
-  opacity: 0;
   position: fixed;
-  top: 0;
+  top: -100px;
   left: 50%;
+  transform: translateX(-50%);
   transform: scale(0);
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-  transition: all ease 0.5s;
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
 }
 
 #warning-message.show-warning {
-  top: 10%;
-  opacity: 1;
+  z-index: 1000;
+  position: fixed;
   transform: scale(1);
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
 }
 
 .warning-content {
@@ -134,23 +147,6 @@ body {
 
 .warning-content button:hover {
   background-color: #d32f2f;
-}
-
-.action-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.action-button a {
-  margin: 2px;
-}
-
-.action-button span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
 }
 
 .start-btn {
@@ -426,8 +422,11 @@ button[type="submit"]:active {
 
 /* Main */
 .main {
+  flex: 1;
   position: relative;
-  width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Users */
@@ -473,17 +472,17 @@ button[type="submit"]:active {
 }
 
 .user-item {
-  color: #f1f1f1; /* Cor do texto dos usuários */
+  color: #f1f1f1;
   padding: 10px;
   border-bottom: 1px solid #333;
 }
 
 .user-item:last-child {
-  border-bottom: none; /* Remove a borda do último item da lista */
+  border-bottom: none;
 }
 
 .user-item:hover {
-  background-color: #333; /* Alterar a cor de fundo ao passar o mouse */
+  background-color: #333;
 }
 
 .icon-users-online {
@@ -491,6 +490,15 @@ button[type="submit"]:active {
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.users-container li {
+  text-align: center;
+}
+
+.users-container a {
+  text-decoration: none;
+  color: #3498db;
 }
 
 /* Alert */
@@ -641,38 +649,74 @@ button[type="submit"]:active {
 
 /* Footer */
 .footer {
-  background-color: #1c1c1c;
-  color: #ffffff;
+  background-color: #313131;
+  padding: 20px 0;
   text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  border-top: 1px solid #333;
 }
 
-.footer p {
-  margin: 0;
-  font-size: 14px;
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 0;
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
-.footer-links li {
-  display: inline-block;
+.footer-text {
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-.footer-links a {
-  color: #3498db;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.social-icons {
+  display: flex;
+  gap: 15px;
 }
 
-.footer-links a:hover {
-  color: #2980b9;
+.social-icons a {
+  color: #00ff0d;
+  font-size: 24px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+}
+
+[data-toggle="tooltip"] {
+  position: relative;
+  cursor: pointer;
+}
+
+[data-toggle="tooltip"]::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00ff0d;
+  color: #000000;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+[data-toggle="tooltip"]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+@media screen and (max-width: 490px) {
+  .social-icons {
+    display: flex;
+    flex-direction: row !important;
+  }
+
+  .footer {
+    padding: 8px;
+  }
 }

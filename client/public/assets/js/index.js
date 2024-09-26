@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let user;
   //Getting user data
-  fetch("http://localhost:2399/api/user-info", {
+  fetch("https://live-chat-b304260d434c.herokuapp.com/api/user-info", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Logout
   logoutButton.addEventListener("click", () => {
-    fetch("http://localhost:2399/auth/logout", {
+    fetch("https://live-chat-b304260d434c.herokuapp.com/auth/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
         alert.classList.add("show-alert");
 
         setTimeout(() => {
-          window.location.href = "http://localhost:2399/chat-geral";
+          window.location.href =
+            "https://live-chat-b304260d434c.herokuapp.com/chat-geral";
           alert.classList.remove("show-alert");
         }, 1700);
       });

@@ -1,3 +1,5 @@
+var socket = io("https://live-chat-b304260d434c.herokuapp.com");
+
 const alert = document.querySelector(".alert");
 const alertMessage = document.querySelector(".alert-text");
 const closeAlertMessage = document.querySelector("close-alert");
@@ -24,7 +26,7 @@ if (loginForm) {
       password: password,
     };
 
-    fetch("http://localhost:2399/auth/login", {
+    fetch("https://live-chat-b304260d434c.herokuapp.com/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,8 +47,11 @@ if (loginForm) {
         alertMessage.innerText = data.message;
         alert.classList.add("show-alert");
 
+        socket.emit("loggedUser", data.user);
+
         setTimeout(() => {
-          window.location.href = "http://localhost:2399/chat-geral";
+          window.location.href =
+            "https://live-chat-b304260d434c.herokuapp.com/chat-geral";
           alert.classList.remove("show-alert");
         }, 1000);
       })
@@ -78,7 +83,7 @@ if (registerForm) {
       password: password,
     };
 
-    fetch("http://localhost:2399/auth/register", {
+    fetch("https://live-chat-b304260d434c.herokuapp.com/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +104,8 @@ if (registerForm) {
         alert("Registered Successfully!");
 
         setTimeout(() => {
-          window.location.href = "http://localhost:2399/login";
+          window.location.href =
+            "https://live-chat-b304260d434c.herokuapp.com/login";
         }, 700);
       })
       .catch((error) => {

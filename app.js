@@ -15,7 +15,7 @@ const port = process.env.PORT;
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: `localhost:2399`,
+    origin: `https://live-chat-b304260d434c.herokuapp.com/`,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Authorization"],
     credentials: true,
@@ -36,7 +36,7 @@ server.listen(port, () => {
   console.log("Server listening on port: ", port);
 });
 
-let users = {};
+let users = [];
 
 io.on("connection", async (socket) => {
   // Mensagens em salas privadas
@@ -69,8 +69,18 @@ io.on("connection", async (socket) => {
     `,
       [data.senderUserId, data.receiverUserId]
     );
-    console.log(queryPreviousPrivateMessages.rows);
+
     socket.emit("previousPrivateMessages", queryPreviousPrivateMessages.rows);
+  });
+
+  socket.on("loggedUser", (user) => {
+    const userExists = users.some(
+      (existingUser) => existingUser.id === user.id
+    );
+
+    if (!userExists) {
+      users.push({ user: user.username, id: user.id });
+    }
   });
 
   const previousMessages = await pool.query(`
@@ -90,10 +100,10 @@ io.on("connection", async (socket) => {
       m.created_at ASC;
     `);
 
+  io.emit("onlineUsers", users);
   socket.emit("previousMessage", previousMessages.rows, users);
 
   socket.on("messageSend", async (data) => {
-    console.log(data);
     try {
       const query = await pool.query(
         `
@@ -116,8 +126,6 @@ io.on("connection", async (socket) => {
   });
 
   socket.on("individualMessage", async (data) => {
-    console.log(data);
-
     try {
       const postIndividualMessage = await pool.query(
         `
@@ -181,21 +189,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  if (req.cookies.token) {
-    try {
-      jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-          return res.render("register.html");
-        }
-
-        return res.redirect("/");
-      });
-    } catch (err) {
-      return res.render("register.html");
-    }
-  } else {
-    res.render("register.html");
-  }
+  res.render("register.html");
 });
 
 app.get("/teste", (req, res) => {

@@ -1,8 +1,8 @@
-var socket = io("http://localhost:2399");
+var socket = io("https://live-chat-b304260d434c.herokuapp.com");
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://localhost:2399/api/user-info", {
+  fetch("https://live-chat-b304260d434c.herokuapp.com/api/user-info", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const messages = () => {
-  console.log(user);
   // Mostrar Usuários Online
   const userButton = document.querySelector("#button-users-online");
   userButton.addEventListener("click", () => {
@@ -74,8 +73,17 @@ const messages = () => {
 
     users.forEach((userOn) => {
       const userItem = document.createElement("li");
-      userItem.textContent = userOn.user;
+      const userLink = document.createElement("a");
+
+      userLink.textContent = userOn.user;
+      if (userOn.user !== user.user) {
+        userLink.href = `/individual-chat/?id=${userOn.id}&username=${userOn.user}`;
+      } else {
+        userLink.href = `#`;
+      }
+
       userItem.classList.add("user-item");
+      userItem.appendChild(userLink);
       usersContainer.appendChild(userItem);
     });
   });

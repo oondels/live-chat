@@ -15,54 +15,45 @@
   </head>
   <body>
     <%- include("./components/navbar") %>
-    <div class="welcome-container">
-      <i id="warning-icon" class="material-symbols-outlined"> warning </i>
+    <main>
+      <div class="welcome-container">
+        <i id="warning-icon" class="material-symbols-outlined"> warning </i>
 
-      <div id="warning-message">
-        <div class="warning-content">
-          <p>
-            Esse aplicativo está em fase de desenvolvimento. Não compartilhe
-            informações pessoais nem confidenciais!
-          </p>
-          <button id="close-warning">Fechar</button>
+        <div id="warning-message">
+          <div class="warning-content">
+            <p>
+              Esse aplicativo está em fase de desenvolvimento. Não compartilhe
+              informações pessoais nem confidenciais!
+            </p>
+            <button id="close-warning">Fechar</button>
+          </div>
+        </div>
+
+        <div class="welcome-messages">
+          <img src="../assets/img/chat.png" alt="chat image" />
+          <div class="slide-messages">
+            <span><h1>Welcome to Oeendel's Live Chat.</h1></span>
+            <span><h1>Make an account!</h1></span>
+            <span><h1>Chat any time!</h1></span>
+          </div>
+        </div>
+        <p>
+          Connect with your friends, make new friends in a fast and secure way!
+        </p>
+      </div>
+
+      <div class="alert" id="alert">
+        <div class="alert-content">
+          <span>
+            <i class="material-symbols-outlined"> warning </i>
+            <h2 class="alert-text"></h2>
+          </span>
+        </div>
+        <div class="actions">
+          <button class="close-alert">Fechar</button>
         </div>
       </div>
-
-      <div class="welcome-messages">
-        <img src="../assets/img/chat.png" alt="chat image" />
-        <div class="slide-messages">
-          <span><h1>Welcome to Oeendel's Live Chat.</h1></span>
-          <span><h1>Make an account!</h1></span>
-          <span><h1>Chat any time!</h1></span>
-        </div>
-      </div>
-      <p>
-        Connect with your friends, make new friends in a fast and secure way!
-      </p>
-
-      <div class="action-button">
-        <span
-          ><a href="/chat-geral"><button class="start-btn">Chat</button></a>
-          <button style="display: none" class="logout-btn">Logout</button>
-        </span>
-        <span class="login-register">
-          <a href="/login"><button class="start-btn">Login</button></a>
-          <a href="/register"><button class="start-btn">Register</button></a>
-        </span>
-      </div>
-    </div>
-
-    <div class="alert" id="alert">
-      <div class="alert-content">
-        <span>
-          <i class="material-symbols-outlined"> warning </i>
-          <h2 class="alert-text"></h2>
-        </span>
-      </div>
-      <div class="actions">
-        <button class="close-alert">Fechar</button>
-      </div>
-    </div>
+    </main>
     <%- include("./components/footer") %>
   </body>
 </html>

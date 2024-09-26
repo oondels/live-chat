@@ -14,56 +14,65 @@
     <title>Register</title>
   </head>
   <body>
-    <div class="container">
-      <form class="form" id="register-form" action="/register" method="POST">
-        <h3>Register</h3>
-        <div class="input-group">
-          <input type="text" name="username" placeholder="Username" required />
+    <%- include("./components/navbar") %>
+    <main>
+      <div class="container">
+        <form class="form" id="register-form" action="/register" method="POST">
+          <h3>Register</h3>
+          <div class="input-group">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <input type="text" name="email" placeholder="Email" required />
+          </div>
+
+          <div class="input-group">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+
+          <button type="submit">Register</button>
+
+          <p class="register-text">
+            Already have an account?
+            <a href="/login">Login</a>
+          </p>
+        </form>
+      </div>
+      <div class="alert" id="alert">
+        <div class="alert-content">
+          <span>
+            <i class="material-symbols-outlined"> warning </i>
+            <h2 class="alert-text"></h2>
+          </span>
         </div>
-
-        <div class="input-group">
-          <input type="text" name="email" placeholder="Email" required />
+        <div class="actions">
+          <button class="close-alert">Fechar</button>
         </div>
+      </div>
 
-        <div class="input-group">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
+      <div class="alert">
+        <div class="alert-content">
+          <span>
+            <i class="material-symbols-outlined"> warning </i>
+            <h2 class="alert-text"></h2>
+          </span>
         </div>
-
-        <button type="submit">Register</button>
-
-        <p class="register-text">
-          Already have an account?
-          <a href="/login">Login</a>
-        </p>
-      </form>
-    </div>
-    <div class="alert" id="alert">
-      <div class="alert-content">
-        <span>
-          <i class="material-symbols-outlined"> warning </i>
-          <h2 class="alert-text"></h2>
-        </span>
+        <div class="actions">
+          <button class="close-alert">Fechar</button>
+        </div>
       </div>
-      <div class="actions">
-        <button class="close-alert">Fechar</button>
-      </div>
-    </div>
-
-    <div class="alert">
-      <div class="alert-content">
-        <span>
-          <i class="material-symbols-outlined"> warning </i>
-          <h2 class="alert-text"></h2>
-        </span>
-      </div>
-      <div class="actions">
-        <button class="close-alert">Fechar</button>
-      </div>
-    </div>
+    </main>
+    <%- include("./components/footer") %>
   </body>
 </html>
