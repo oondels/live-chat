@@ -13,14 +13,22 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
 const server = http.createServer(app);
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: `https://live-chat-b304260d434c.herokuapp.com`,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Authorization"],
+    credentials: true,
+  },
+  transports: ["websocket", "polling"],
+});
 
-app.use(express.static(path.join(__dirname, "../client/public")));
+app.use(express.static(path.join(__dirname, "./client/public")));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/auth", authRoutes);
 
-app.set("views", path.join(__dirname, "../client/public/views"));
+app.set("views", path.join(__dirname, "./client/public/views"));
 app.engine("html", require("ejs").renderFile);
 app.set("view engine", "html");
 
@@ -209,5 +217,5 @@ app.get("/register", (req, res) => {
 });
 
 app.get("/teste", (req, res) => {
-  res.send("Heelo World!");
+  res.send("Hello World");
 });

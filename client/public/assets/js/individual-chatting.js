@@ -1,3 +1,4 @@
+var socket = io("https://live-chat-b304260d434c.herokuapp.com/");
 const params = new URLSearchParams(window.location.search);
 const chatUserId = params.get("id");
 const chatUsername = params.get("username");
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const privateMessages = () => {
-  var socket = io("http://localhost:2399/");
+  var socket = io("https://live-chat-b304260d434c.herokuapp.com/");
 
   const chatUserTitle = document.getElementById("private-chat");
   chatUserTitle.innerHTML = `Chating with ${chatUsername}`;

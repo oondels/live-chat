@@ -291,6 +291,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .hello {
@@ -456,4 +457,13 @@ button[type="submit"]:active {
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+/* Alert */
+.show-alert {
+  width: 300px;
+  height: 250px;
+  background-color: red;
+  position: absolute;
+  /* right: 30%; */
 }
