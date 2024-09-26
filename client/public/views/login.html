@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
 
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <link rel="stylesheet" href="../assets/static/styles.css" />
+    <script src="../assets/js/authenticate.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -33,49 +38,16 @@
         </p>
       </form>
     </div>
-
-    <script type="text/javascript">
-      var form = document.querySelector("#login-form");
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        var user = document.querySelector("input[name=login]").value;
-        var password = document.querySelector("input[name=password]").value;
-
-        if (!user.length && !password.length) {
-          return alet("All fields are requuired");
-        }
-
-        let userInfo = {
-          user: user,
-          password: password,
-        };
-
-        fetch("http://localhost:2399/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userInfo),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to fecth");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            localStorage.setItem("token", data.token);
-            alert("Logged succesfully");
-
-            setTimeout(() => {
-              window.location.href = "http://localhost:2399/chat-geral";
-            }, 700);
-          })
-          .catch((error) => {
-            console.error("Server connection failed", error.message);
-          });
-      });
-    </script>
+    <div class="alert" id="alert">
+      <div class="alert-content">
+        <span>
+          <i class="material-symbols-outlined"> warning </i>
+          <h2 class="alert-text"></h2>
+        </span>
+      </div>
+      <div class="actions">
+        <button class="close-alert">Fechar</button>
+      </div>
+    </div>
   </body>
 </html>

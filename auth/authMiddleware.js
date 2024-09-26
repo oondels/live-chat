@@ -14,12 +14,12 @@ exports.protect = async (req, res, next) => {
 
   if (query.rows.length > 0) {
     console.log("Token found in blacklist");
-    return res.redirect("/");
+    return res.redirect("/login");
   }
 
   if (!token) {
     console.log("Token not found");
-    return res.redirect("/");
+    return res.redirect("/login");
   }
 
   try {

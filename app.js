@@ -15,7 +15,7 @@ const port = process.env.PORT;
 const server = http.createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: `https://live-chat-b304260d434c.herokuapp.com`,
+    origin: `localhost:2399`,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Authorization"],
     credentials: true,
@@ -177,25 +177,7 @@ app.get("/protected", authMiddleware.protect, (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  if (req.cookies.token) {
-    // Tenta verificar o token
-    try {
-      jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-          // Se o token for inválido ou expirado, renderiza a página de login
-          return res.render("login.html");
-        }
-        // Se o token for válido, redireciona para a página apropriada (por exemplo, /dashboard)
-        return res.redirect("/"); // Redirecione para a página após login
-      });
-    } catch (err) {
-      // Se houver um erro na verificação do token, renderiza a página de login
-      return res.render("login.html");
-    }
-  } else {
-    // Se não houver token, exibe a página de login
-    res.render("login.html");
-  }
+  res.render("login.html");
 });
 
 app.get("/register", (req, res) => {
@@ -218,4 +200,8 @@ app.get("/register", (req, res) => {
 
 app.get("/teste", (req, res) => {
   res.send("Hello World");
+});
+
+app.get("/nav-bar", (req, res) => {
+  res.render("./components/navbar.html");
 });

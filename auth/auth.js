@@ -19,16 +19,25 @@ const createWebToken = (user) => {
 exports.register = async (req, res) => {
   const { email, user, password, name } = req.body;
 
-  const query = await pool.query(
+  const queryUser = await pool.query(
     `
     SELECT * FROM chat.user WHERE username = $1
     `,
     [user]
   );
+  const queryEmail = await pool.query(
+    `
+    SELECT * FROM chat.user WHERE email = $1
+    `,
+    [email]
+  );
 
-  if (query.rows.length > 0) {
-    console.log("User already in use");
+  if (queryUser.rows.length > 0) {
     return res.status(400).json({ message: "User already in use" });
+  }
+
+  if (queryEmail.rows.length > 0) {
+    return res.status(400).json({ message: "Email already in use" });
   }
 
   const hashedPassword = bcrypt.hashSync(password, 10);
@@ -52,6 +61,10 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   const { user, password } = req.body;
 
+  if ((!user, !password)) {
+    res.status(403).send("Preencha todas as credenciais.");
+  }
+
   const query = await pool.query(
     `
     SELECT * FROM chat.user WHERE username = $1
@@ -60,7 +73,6 @@ exports.login = async (req, res) => {
   );
 
   if (query.rows.length === 0) {
-    console.log("User not found, register now!");
     return res.status(400).json({ message: "User not found, register now!" });
   }
 
@@ -80,12 +92,13 @@ exports.login = async (req, res) => {
   });
 
   console.log(`Logged as ${foundUser.username}`);
-  return res.status(201).json({ token });
+  return res.status(200).json({ message: `Logged as ${foundUser.username}` });
 };
 
 exports.logout = async (req, res) => {
   try {
     const token = req.cookies.token;
+    console.log(token);
     if (!token) {
       return res.status(400).json({ message: "Token não fornecido" });
     }
