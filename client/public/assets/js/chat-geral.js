@@ -1,8 +1,9 @@
-var socket = io("https://live-chat-b304260d434c.herokuapp.com");
+import { ip } from "../../ip.js";
+var socket = io(ip);
 
 let user;
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("https://live-chat-b304260d434c.herokuapp.com/api/user-info", {
+  fetch(`${ip}/api/user-info`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

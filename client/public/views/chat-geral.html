@@ -5,35 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Live Chat</title>
     <link rel="icon" href="assets/img/icon/favicon.ico" type="image/x-icon" />
-
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
-
+    <script src="/socket.io/socket.io.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
 
-    <link rel="icon" href="assets/img/icon/favicon.ico" type="image/x-icon" />
-    <script src="/socket.io/socket.io.js"></script>
-    <script
-      type="module"
-      src="../assets/js/individual-chatting.js"
-      defer
-    ></script>
+    <script type="module" src="../assets/js/chat-geral.js" defer></script>
   </head>
   <body>
     <%- include("./components/navbar") %>
     <main>
       <div class="main">
+        <div class="users-container">
+          <i
+            id="button-users-online"
+            class="icon-users-online material-symbols-outlined"
+          >
+            groups
+          </i>
+          <div id="users-online-content">
+            <h2>Usuários Online</h2>
+            <ul id="users-online" class="users-list"></ul>
+          </div>
+        </div>
+
         <div class="container">
           <div class="hello">
-            <h1 id="private-chat">Loading...</h1>
+            <h1 id="user">Olá <%= user %></h1>
           </div>
-          <form class="chat" id="individual-chat">
+          <form class="chat" id="chat">
             <div class="messages"></div>
             <input
               name="message"
@@ -46,9 +52,19 @@
           </form>
         </div>
       </div>
+      <div class="alert" id="alert">
+        <div class="alert-content">
+          <span>
+            <i class="material-symbols-outlined"> warning </i>
+            <h2 class="alert-text"></h2>
+          </span>
+        </div>
+        <div class="actions">
+          <button class="close-alert">Fechar</button>
+        </div>
+      </div>
     </main>
-
-    <div class="alert">
+    <div class="alert" id="alert">
       <div class="alert-content">
         <span>
           <i class="material-symbols-outlined"> warning </i>

@@ -1,5 +1,6 @@
+import { ip } from "../../ip.js";
+
 document.addEventListener("DOMContentLoaded", () => {
-  const authButtons = document.querySelector(".login-register");
   const logoutButton = document.querySelector(".logout-btn");
 
   const navBar = document.querySelector(".navbar");
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let user;
   //Getting user data
-  fetch("https://live-chat-b304260d434c.herokuapp.com/api/user-info", {
+  fetch(`${ip}/api/user-info`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -31,8 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
-      authButtons.style.display = "none";
-      logoutButton.style.display = "block";
       user = data;
     })
     .catch((error) => {
@@ -41,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Logout
   logoutButton.addEventListener("click", () => {
-    fetch("https://live-chat-b304260d434c.herokuapp.com/auth/logout", {
+    fetch(`${ip}/auth/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,8 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert.classList.add("show-alert");
 
         setTimeout(() => {
-          window.location.href =
-            "https://live-chat-b304260d434c.herokuapp.com/chat-geral";
+          window.location.href = `${ip}/chat-geral`;
           alert.classList.remove("show-alert");
         }, 1700);
       });
@@ -72,26 +70,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const slides = document.querySelectorAll("span");
   let currentSlide = 0;
 
-  slides[currentSlide].classList.add("show");
-  const showSlide = () => {
-    slides.forEach((slide) => {
-      slide.classList.remove("show");
-    });
-
+  if (slides[currentSlide]) {
     slides[currentSlide].classList.add("show");
-    currentSlide = (currentSlide + 1) % slides.length;
-  };
+    const showSlide = () => {
+      slides.forEach((slide) => {
+        slide.classList.remove("show");
+      });
 
-  setInterval(showSlide, 3000);
+      slides[currentSlide].classList.add("show");
+      currentSlide = (currentSlide + 1) % slides.length;
+    };
+
+    setInterval(showSlide, 3000);
+  }
 
   const warningIcon = document.getElementById("warning-icon");
-  warningIcon.addEventListener("click", () => {
-    const warningContainer = document.getElementById("warning-message");
-    warningContainer.classList.add("show-warning");
-  });
+
+  if (warningIcon) {
+    warningIcon.addEventListener("click", () => {
+      const warningContainer = document.getElementById("warning-message");
+      warningContainer.classList.add("show-warning");
+    });
+  }
 
   // Fechar o aviso
-  document.getElementById("close-warning").addEventListener("click", () => {
-    document.getElementById("warning-message").classList.remove("show-warning");
-  });
+  if (document.getElementById("close-warning")) {
+    document.getElementById("close-warning").addEventListener("click", () => {
+      document
+        .getElementById("warning-message")
+        .classList.remove("show-warning");
+    });
+  }
 });

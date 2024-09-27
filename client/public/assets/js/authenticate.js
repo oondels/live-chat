@@ -1,4 +1,6 @@
-var socket = io("https://live-chat-b304260d434c.herokuapp.com");
+import { ip } from "../../ip.js";
+
+var socket = io(ip);
 
 const alert = document.querySelector(".alert");
 const alertMessage = document.querySelector(".alert-text");
@@ -26,7 +28,7 @@ if (loginForm) {
       password: password,
     };
 
-    fetch("https://live-chat-b304260d434c.herokuapp.com/auth/login", {
+    fetch(`${ip}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,8 +52,7 @@ if (loginForm) {
         socket.emit("loggedUser", data.user);
 
         setTimeout(() => {
-          window.location.href =
-            "https://live-chat-b304260d434c.herokuapp.com/chat-geral";
+          window.location.href = `${ip}/chat-geral`;
           alert.classList.remove("show-alert");
         }, 1000);
       })
@@ -83,7 +84,7 @@ if (registerForm) {
       password: password,
     };
 
-    fetch("https://live-chat-b304260d434c.herokuapp.com/auth/register", {
+    fetch(`${ip}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,8 +105,7 @@ if (registerForm) {
         alert("Registered Successfully!");
 
         setTimeout(() => {
-          window.location.href =
-            "https://live-chat-b304260d434c.herokuapp.com/login";
+          window.location.href = `${ip}/login`;
         }, 700);
       })
       .catch((error) => {
