@@ -102,7 +102,8 @@ if (registerForm) {
         return data;
       })
       .then((data) => {
-        alert("Registered Successfully!");
+        alertMessage.innerText = data.message;
+        alert.classList.add("show-alert");
 
         setTimeout(() => {
           window.location.href = `${ip}/login`;

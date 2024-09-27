@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <script src="/socket.io/socket.io.js"></script>
     <link rel="icon" href="assets/img/icon/favicon.ico" type="image/x-icon" />
     <script type="module" src="../assets/js/authenticate.js" defer></script>
     <title>Register</title>
@@ -12,7 +13,7 @@
     <%- include("./components/navbar") %>
     <main>
       <div class="container">
-        <form class="form" id="register-form" action="/register" method="POST">
+        <form class="form" id="register-form">
           <h3>Register</h3>
           <div class="input-group">
             <input
