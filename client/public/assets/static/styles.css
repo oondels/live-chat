@@ -435,9 +435,16 @@ button[type="submit"]:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  left: 1%;
-  top: 0;
+}
+
+.users-online {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 3%;
+  top: 15%;
 }
 
 #users-online-content {
@@ -446,6 +453,9 @@ button[type="submit"]:active {
   opacity: 0;
   overflow: hidden;
   transition: max-height 0.5s ease, opacity 0.5s ease;
+  background-color: rgba(41, 128, 185, 0.5);
+  border-radius: 20px;
+  padding: 10px;
 }
 
 #users-online-content.show {
@@ -720,6 +730,10 @@ button[type="submit"]:active {
     font-size: 22px;
   }
 
+  .chat {
+    width: auto !important;
+  }
+
   .welcome-container i {
     width: 38px;
     height: 38px;
@@ -754,6 +768,7 @@ button[type="submit"]:active {
     padding: 20px 0;
     background-color: #333;
     transition: all 0.3s ease-in-out;
+    z-index: 900;
   }
 
   .navbar.show {
@@ -810,14 +825,10 @@ button[type="submit"]:active {
     z-index: 1000;
   }
 
-  .users-container {
-    position: fixed;
-    right: 0;
-    z-index: 900;
-  }
-
-  #users-online-content {
-    padding: 10px;
+  .users-online {
+    left: 3%;
+    top: 5%;
+    z-index: 100;
   }
 }
 
