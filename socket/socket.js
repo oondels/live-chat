@@ -94,17 +94,19 @@ const configureSocket = (io) => {
       try {
         const postIndividualMessage = await pool.query(
           `
-          INSERT INTO 
+          INSERT INTO
             chat.private_messages (message, created_at, from_user_id, to_user_id)
           VALUES
            ($1, NOW(), $2, $3)
           RETURNING id;
           `,
-          [data.messageContent, data.senderUserId, data.receiverUserId]
+          [
+            data.messageContent,
+            data.senderUserId,
+            parseInt(data.receiverUserId),
+          ]
         );
-
         const newMessageId = postIndividualMessage.rows[0].id;
-
         io.to(data.room).emit("newIndividualMessage", data);
       } catch (error) {
         console.error("Error sending message: ", error);

@@ -56,6 +56,7 @@ app.get("/chat-geral", authMiddleware.protect, (req, res) => {
 
 app.get("/individual-chat", authMiddleware.protect, (req, res) => {
   const user = req.user;
+
   res.render("individual-chating.html", {
     userId: user.id,
     user: user.user,
@@ -69,10 +70,6 @@ app.get("/api/user-info", authMiddleware.protect, (req, res) => {
   res.json(user);
 });
 
-// app.get("/protected", authMiddleware.protect, (req, res) => {
-//   res.json(req.user);
-// });
-
 app.get("/login", (req, res) => {
   res.render("login.html");
 });
@@ -83,8 +80,4 @@ app.get("/register", (req, res) => {
 
 app.get("/teste", (req, res) => {
   res.send("Hello World");
-});
-
-app.get("/nav-bar", (req, res) => {
-  res.render("./components/navbar.html");
 });

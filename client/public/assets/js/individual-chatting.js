@@ -36,7 +36,7 @@ const privateMessages = () => {
 
   // Gerenciamento de Mensagens
   const scrollToBottom = () => {
-    const messagesDiv = document.querySelector(".messages");
+    const messagesDiv = document.querySelector(".individual-messages");
     setTimeout(() => {
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }, 0);
@@ -44,7 +44,7 @@ const privateMessages = () => {
 
   const renderMessages = (message) => {
     if (message.senderName === user.user) {
-      $(".messages").append(
+      $(".individual-messages").append(
         "<div class='message sent'><strong>" +
           message.senderName +
           "</strong>: " +
@@ -52,7 +52,7 @@ const privateMessages = () => {
           "</div>"
       );
     } else {
-      $(".messages").append(
+      $(".individual-messages").append(
         "<div class='message'><strong>" +
           message.senderName +
           "</strong>: " +
@@ -83,7 +83,7 @@ const privateMessages = () => {
 
   $("#individual-chat").submit((event) => {
     event.preventDefault();
-    var message = $("input[name=message]").val();
+    var message = $("input[name=individual-message]").val();
 
     if (message.length) {
       var messageObject = {
@@ -99,7 +99,7 @@ const privateMessages = () => {
       };
 
       socket.emit("individualMessage", messageObject);
-      $("input[name=message]").val("");
+      $("input[name=individual-message]").val("");
     }
   });
 
